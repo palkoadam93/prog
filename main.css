@@ -1,0 +1,14 @@
+body {
+    font-family: Arial;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}
+
+a:hover {
+    background-color: purple;
+    color: white;
+}
