@@ -7,9 +7,22 @@
   </head>
   <body>
     <h1>13. feladat - Adatbázisbeli megszorítások ellenőrzése</h1>
+    
     <h3>1. Határozzuk meg, hogy a termékek hányféle anyagból épülnek fel! Írjuk ki a termék nevét, valamint azt, hogy a termék hányféle alkatrészből épül fel!</h3>
+    <p>SELECT kód, COUNT(*) FROM szerkezet GROUP BY kód;</p>
+    <p>SELECT név, COUNT(*) FROM termék, szerkezet WHERE termék.kód=szerkezet.kód GROUP BY név;</p>
+    <p>SELECT termék.kód, MAX(név), COUNT(*) FROM termék, szerkezet WHERE termék.kód=szerkezet.kód GROUP BY termék.kód;</p>
+    
     <h3>2. Keressük meg azokat a termékneveket, amelyek nem egyediek!</h3>
+    <p>SELECT COUNT(DISTINCT név) AS [a különböző nevek száma], COUNT(DISTINCT kód) AS [a különböző kódok száma], COUNT(*) AS [a sorok száma] FROM termék;</p>
+    <p>SELECT DISTINCT név AS t_név FROM termék; => TERMÉKNÉV{t_név}</p>
+    <p>SELECT COUNT(t_név) AS [a nevek száma] FROM terméknév; => NÉVSZÁM{a nevek száma}</p>
+    <p>SELECT MIN([a nevek száma]) AS [a különböző nevek száma], COUNT(kód) AS [a különböző kódok száma], COUNT(*) AS [a sorok száma] FROM termék, névszám;</p>
+    <p>SELECT (SELECT COUNT(*) FROM (SELECT DISTINCT név FROM termék)) AS [a különböző nevek száma], COUNT(kód) AS [a különböző kódok száma], COUNT(*) AS [a sorok száma] FROM termék;</p>
+    <p>SELECT név, COUNT(*) AS [ennyiszer fordul elő ez a név] FROM termék GROUP BY név HAVING COUNT(*)>1;</p>
+    
     <h3>3. Írassuk ki a TERMÉK táblából azokat a kódokat, amelyek nem találhatók meg a szerkezet táblában, azaz azokat, amelyeknek nem adtuk meg a felépítését!</h3>
-
+    <p>SELECT kód AS [nincs szerkezete] FROM termék WHERE kód NOT IN (SELECT kód FROM szerkezet);</p>
+    <p>SELECT kód AS [nincs hozzá termék] FROM szerkezet WHERE kód NOT IN (SELECT kód FROM termék);</p>
   </body>
 </html>

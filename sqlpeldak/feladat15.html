@@ -7,10 +7,21 @@
   </head>
   <body>
     <h1>15. feladat - Az eredménytáblát szűkítő feltételek</h1>
+    
     <h3>1. Gyűjtsük ki az adatbázisból, hogy melyik partner milyen termékből mennyit rendelt meg 2017 januárjában!</h3>
+    <p>SELECT partner_kód, kód, SUM(darab) FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám GROUP BY partner_kód, kód;</p>
+    <p>SELECT partner_kód, kód, SUM(darab) FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám AND rend_dátum BETWEEN #01/01/2017# AND #01/31/2017# GROUP BY partner_kód, kód;</p>
+    <p>SELECT partner_kód, kód, SUM(darab) FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám AND rend_dátum LIKE '2017.01.%' GROUP BY partner_kód, kód;</p>
+    
     <h3>2. Szűkítsük tovább az eredménytáblát, hogy csak azok a termékek kerüljenek be az összesítésbe, amelyekből az adott megrendelő több mint 500 darabot rendelt meg 2017 januárjában!</h3>
+    <p>SELECT partner_kód, kód, SUM(darab) FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám AND rend_dátum BETWEEN #01/01/2017# AND #01/31/2017# GROUP BY partner_kód, kód HAVING SUM(darab)>500;</p>
+    
     <h3>3. Szűkítsük tovább az eredménytáblát, hogy csak azok a termékek kerüljenek be, amelyek kódja "A" betűvel kezdődik, és amelyekből az adott megrendelő több mint 500 darabot rendelt meg 2017 januárjában!</h3>
+    <p>SELECT partner_kód, kód, SUM(darab) FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám AND rend_dátum BETWEEN #01/01/2017# AND #01/31/2017# AND kód LIKE 'A%' GROUP BY partner_kód, kód HAVING SUM(darab)>500;</p>
+    <p>SELECT partner_kód, kód, SUM(darab) FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám AND rend_dátum BETWEEN #01/01/2017# AND #01/31/2017# GROUP BY partner_kód, kód HAVING SUM(darab)>500 AND kód LIKE 'A%';</p>
+    
     <h3>4. Szűkítsük még tovább az eredménytáblát, hogy csak azok a termékek kerüljenek be az összesítésbe, amelyekből összesen legalább 1000 darabot rendeltek meg 2017 januárjában, és amelyek kódja "A" betűvel kezdődik, és amelyekből egy adott megrendelő több mint 500 darabot rendelt meg 2017 januárjában!</h3>
-
+    <p>SELECT partner_kód, kód, SUM(darab) FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám AND rend_dátum BETWEEN #01/01/2017# AND #01/31/2017# AND kód LIKE 'A%' AND kód IN (SELECT kód FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám AND rend_dátum BETWEEN #01/01/2017# AND #01/31/2017# GROUP BY kód HAVING SUM(darab)>1000) GROUP BY partner_kód, kód HAVING SUM(darab)>500;</p>
+    <p>SELECT partner_kód, kód, SUM(darab) FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám AND rend_dátum BETWEEN #01/01/2017# AND #01/31/2017# AND kód IN (SELECT kód FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám AND rend_dátum BETWEEN #01/01/2017# AND #01/31/2017# AND kód LIKE 'A%' GROUP BY kód HAVING SUM(darab)>1000) GROUP BY partner_kód, kód HAVING SUM(darab)>500;</p>
   </body>
 </html>

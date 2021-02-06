@@ -8,6 +8,8 @@
   <body>
     <h1>14. feladat - Két szempont szerinti csoportosítás</h1>
     <h3>Gyűjtsük ki az adatbázisból, hogy melyik partner milyen termékből mennyit rendelt meg!</h3>
-
+    <p>1. megoldás</p>
+    <p>SELECT partner_kód, kód, SUM(darab) FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám GROUP BY partner_kód, kód;</p>
+    <p>SELECT kód, partner_kód, SUM(darab) FROM rendelésfej, rendelés WHERE rendelésfej.rend_szám = rendelés.rend_szám GROUP BY kód, partner_kód;</p>
   </body>
 </html>

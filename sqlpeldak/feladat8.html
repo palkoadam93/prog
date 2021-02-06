@@ -21,6 +21,5 @@
     <h3>3. A "113" azonosítót tartalmazó termékek teljes szerkezetének a kiírásánál a termék nevét, a benne lévő anyag nevét, a belőle szükséges mennyiséget és a mértékegységet is írassuk ki!</h3>
     <p>SELECT kód, azonosító, mennyiség FROM szerkezet WHERE kód IN(SELECT kód FROM szerkezet WHERE azonosító=113); => SZERKEZET_113{kód, azonosító, mennyiség}</p>
     <p>SELECT név, neve, mennyiség, mért_egys FROM termék, szerkezet_113, anyag WHERE termék.kód=szerkezet_113.kód AND szerkezet_113.azonosító=anyag.azonosító ORDER BY név, neve;</p>
-
   </body>
 </html>

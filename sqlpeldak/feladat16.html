@@ -8,6 +8,8 @@
   <body>
     <h1>16. feladat - N:M viszonyú táblák összekapcsolása</h1>
     <h3>Határozzuk meg, hogy mennyi a 2017. november 10-re vállalt megrendelések összes anyagszükséglete! (Anyagonként ki kell íratni a szükséges anyag azonosítóját, nevét, az anyagból szükséges összes mennyiséget és az anyag mértékegységét!)</h3>
-
+    <p>SELECT kód, SUM(darab) AS össz FROM rendelés WHERE dátum = #11/10/2017# GROUP BY kód; => ÖSSZDARAB{kód, össz}</p>
+    <p>SELECT anyag.azonosító, MAX(anyag.neve) AS anyagnév, SUM(összdarab.össz * szerkezet.mennyiség) AS [összes anyag], MIN(anyag.mért_egys) AS mértékegység FROM összdarab, szerkezet, anyag WHERE összdarab.kód = szerkezet.kód AND szerkezet.azonosító = anyag.azonosító GROUP BY anyag.azonosító</p>
+    <p>SELECT anyag.azonosító, MAX(anyag.neve) AS anyagnév, SUM(rendelés.darab * szerkezet.mennyiség) AS [összes anyag], MIN(anyag.mért_egys) AS mértékegység FROM rendelés, szerkezet, anyag WHERE rendelés.kód = szerkezet.kód AND szerkezet.azonosító = anyag.azonosító AND rendelés.dátum = #11/10/2017# GROUP BY anyag.azonosító;</p>
   </body>
 </html>
