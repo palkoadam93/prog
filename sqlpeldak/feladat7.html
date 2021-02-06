@@ -7,8 +7,18 @@
   </head>
   <body>
     <h1>7. feladat - Táblák összekapcsolása, direktszorzat</h1>
+    
     <h3>1. Határozzuk meg, hogy egy adott termék milyen anyagokból épül fel! A termékeknek a nevét és a bennük lévő anyaoknak az azonosítóját írassuk ki!</h3>
+    <p>SELECT termék.*, szerkezet.* FROM termék, szerkezet;</p>
+    <p>SELECT termék.kód, szerkezet.kód FROM termék, szerkezet;</p>
+    <p>SELECT termék.kód, szerkezet.kód FROM termék, szerkezet WHERE termék.kód=szerkezet.kód;</p>
+    <p>SELECT név, termék.kód, szerkezet.kód, azonosító FROM termék, szerkezet WHERE termék.kód=szerkezet.kód;</p>
+    <p>SELECT név, azonosító FROM termék, szerkezet WHERE termék.kód=szerkezet.kód;</p>
+    
     <h3>2. A termék nevét és a benne lévő anyagok nevét írjuk ki!</h3>
-
+    <p>SELECT név, termék.kód, szerkezet.kód, szerkezet.azonosító, anyag.azonosító, neve FROM termék, szerkezet, anyag WHERE termék.kód=szerkezet.kód AND szerkezet.azonosító=anyag.azonosító;</p>
+    <p>SELECT név, neve FROM termék, szerkezet, anyag WHERE termék.kód=szerkezet.kód AND szerkezet.azonosító=anyag.azonosító;</p>
+    <p>SELECT név, neve FROM termék, szerkezet, anyag WHERE termék.kód=szerkezet.kód AND szerkezet.azonosító=anyag.azonosító AND termék.kód='AA1';</p>
+    <p>SELECT neve, név FROM termék, szerkezet, anyag WHERE termék.kód=szerkezet.kód AND szerkezet.azonosító=anyag.azonosító AND anyag.azonosító=112;</p>
   </body>
 </html>
