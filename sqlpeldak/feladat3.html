@@ -6,8 +6,15 @@
     <title>3. feladat</title>
   </head>
   <body>
-    <h1>3. feladat</h1>
+    <h1>3. feladat - A logikai műveletek sorrendje</h1>
     <h3>Keressük meg a 2016. január 1-jére és 2-ára vállalt megrendeléseket, amelyek "A" betűvel kezdődő kódú terméket rendelték meg! Írassuk ki a feltételnek megfelelő rendelések minden adatát a RENDELÉS táblából!</h3>
 
+    <p>Rossz megoldás</p>
+    <p>SELECT rendelés.* FROM rendelés WHERE dátum = #01/01/2016# OR dátum = #01/02/2016# AND Left(kód,1) = 'A';</p>
+
+    <p>Jó megoldás</p>
+    <p>SELECT RENDELÉS.* FROM RENDELÉS WHERE (((RENDELÉS.dátum) = #1/1/2016#) AND ((Left([kód],1)) = 'A')) OR (((RENDELÉS.dátum) = #1/2/2016#) AND ((Left([kód],1)) = 'A'));</p>
+    <p>SELECT rendelés.* FROM rendelés WHERE dátum=#1/1/2016# AND Left(kód,1) = 'A' OR dátum=#1/2/2016# AND Left(kód,1) = 'A';</p>
+    <p>SELECT rendelés.* FROM rendelés WHERE (dátum=#1/1/2016# OR dátum=#1/2/2016#) AND Left(kód,1) = 'A';</p>
   </body>
 </html>

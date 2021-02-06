@@ -6,8 +6,21 @@
     <title>1. feladat</title>
   </head>
   <body>
-      <h1>1. feladat</h1>
-      <h3>Írassuk ki azoknak az anyagoknak az azonosítóját, amelyek 2-vel kezdődnek!</h3>
+    <h1>1. feladat</h1>
+    <h3>Írassuk ki azoknak az anyagoknak az azonosítóját, amelyek 2-vel kezdődnek!</h3>
 
+    <p>1. megoldás</p>
+    <p>SELECT ANYAG.azonosító FROM ANYAG WHERE (((ANYAG.azonosító)>=200) AND ((ANYAG.azonosító)&lt;=299));</p>
+    <p>SELECT azonosító FROM anyag WHERE azonosító >=200 AND azonosító &lt;= 299;</p>
+
+    <p>2. megoldás</p>
+    <p>SELECT azonosító FROM anyag WHERE 200 &lt;= azonosító AND azonosító &lt;= 299;</p>
+      
+    <p>3. megoldás</p>
+    <p>SELECT ANYAG.azonosító FROM ANYAG WHERE (((ANYAG.azonosító)>=200 And (ANYAG.azonosító)&lt;=299));</p>
+    <p>SELECT ANYAG.azonosító FROM ANYAG WHERE (([azonosító]>=200 And [azonosító]&lt;=299));</p>
+
+    <p>4. megoldás</p>
+    <p>SELECT azonosító FROM anyag WHERE azonosító BETWEEN 200 AND 299;</p>
   </body>
 </html>

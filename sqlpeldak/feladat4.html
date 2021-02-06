@@ -6,8 +6,15 @@
     <title>4. feladat</title>
   </head>
   <body>
-    <h1>4. feladat</h1>
+    <h1>4. feladat - A feltétel tagadása</h1>
     <h3>Készítsünk egy listát, amely tartalmazza azoknak a termékeknek a kódját, darabszámát és a megrendelésszámát, amelyeket mától számítva egy héten belül kell elkészíteni és még nincsenek készen!</h3>
 
+    <p>1. megoldás</p>
+    <p>SELECT * FROM rendelés WHERE kész = FALSE;</p>
+    <p>SELECT * FROM rendelés WHERE kész = FALSE AND Date() &lt;= dátum AND dátum &lt;= Date()+7;</p>
+    <p>SELECT rend_szám, kód, darab, dátum FROM rendelés WHERE kész = FALSE AND Date() &lt;= dátum AND dátum &lt;= Date()+7;</p>
+
+    <p>2. megoldás</p>
+    <p>SELECT rend_szám, kód, darab, dátum FROM rendelés WHERE NOT kész AND dátum BETWEEN Date() AND Date()+7;</p>
   </body>
 </html>
