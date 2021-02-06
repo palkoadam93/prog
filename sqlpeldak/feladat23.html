@@ -8,6 +8,9 @@
   <body>
     <h1>23. feladat - Az eredménytábla sorainak sorszámozása</h1>
     <h3>Számítsuk ki az egyes termékek bonyolultsági szintjét, amit az előállításához szükséges anyagfajták számával adunk meg! A bonyolultsági szint szerint adjunk a termékeknek egy folyamatosan növekvő sorszámot!</h3>
-
+    <p>SELECT kód, COUNT(azonosító) AS bonyolultság FROM szerkezet GROUP BY kód ORDER BY COUNT(azonosító), kód; => TERMÉK_B{kód, bonyolultság}</p>
+    <p>SELECT első.kód, első.bonyolultság, második.kód, második.bonyolultság FROM termék_b első, termék_b második WHERE első.bonyolultság > második.bonyolultság OR (első.bonyolultság = második.bonyolultság AND első.kód >= második.kód) ORDER BY első.bonyolultság, első.kód, második.kód;</p>
+    <p>SELECT COUNT(első.kód) AS sorszám, első.kód FROM termék_b első, termék_b második WHERE első.bonyolultság > második.bonyolultság OR (első.bonyolultság = második.bonyolultság AND első.kód >= második.kód) GROUP BY első.kód ORDER BY COUNT(első.kód);</p>
+    <p>SELECT COUNT(első.kód) AS sorszám, első.kód, első.bonyolultság FROM termék_b első, termék_b második WHERE első.bonyolultság > második.bonyolultság OR (első.bonyolultság = második.bonyolultság AND első.kód >= második.kód) GROUP BY első.kód, első.bonyolultság ORDER BY 1;</p>
   </body>
 </html>

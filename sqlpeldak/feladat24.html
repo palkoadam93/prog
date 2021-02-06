@@ -7,8 +7,20 @@
   </head>
   <body>
     <h1>24. feladat - Előre meghatározott sorú táblázat készítése</h1>
+    
     <h3>1. Készítsünk év közben az adott év megrendeléseinek az értékéről havi összesített listát! Az utolsó hónaphoz tegyünk egy megjegyzést, hogy ez a hónap még lezáratlan, még érkezhetnek megrendelések!</h3>
+    <p>SELECT Month(rend_dátum) AS sorszám, SUM(darab*ár) AS rend_érték, IF(Month(rend_dátum) = Month(Date()), 'lezáratlan', '') AS lezáratlan FROM rendelésfej, rendelés, termék WHERE rendelésfej.rend_szám = rendelés.rend_szám AND rendelés.kód = termék.kód AND Year(rend_dátum) = Year(Date()) GROUP BY Month(rend_dátum);</p>
+    <p>=> HAVI_LISTA{sorszám, rend_érték, lezáratlan}</p>
+    
     <h3>2. Készítsünk olyan listát, amelyik tartalmazza az adott év minden hónapját, és a megrendelések összesített értékét függetlenül attól, hogy az adott hónapra érkezett-e megrendelés! Amennyiben az adott hónapra még nem érkezett be megrendelés, mert az a hónap még nem kezdődött meg, a rendelés összértéke legyen üres! Módosítsuk továbbá az előző listát úgy, hogy a befejezett hónapok mellé kerüljön kiírásra, hogy az a hónap már lezárt!</h3>
+    <p>SELECT Format(Year(Date()),'0000') & '.' & hónap AS dátum, rend_érték, IF(hónapok.sorszám&lt;Month(Date()), 'lezárva', IF(hónapok.sorszám = Month(Date()), 'lezáratlan !!!', '')) AS lezáratlan FROM hónapok, havi_lista WHERE havi_lista.sorszám = hónapok.sorszám;</p>
 
+    <p>1. megoldás</p>
+    <p>SELECT hónapok.sorszám, Format(Year(Date()),'0000') & '.' & hónap AS dátum, rend_érték AS rendelt_érték, IF(hónapok.sorszám&lt;Month(Date()),'lezárva', IF(hónapok.sorszám = Month(Date()), 'lezáratlan !!!', '')) AS lezáratlan FROM hónapok, havi_lista WHERE hónapok.sorszám = havi_lista.sorszám</p>
+    <p>UNION</p>
+    <p>SELECT hónapok.sorszám, Format(Year(Date()),'0000') & '.' & hónap AS dátum, Null AS rendelt_érték, IF(hónapok.sorszám&lt;Month(Date()), 'lezárva', IF(hónapok.sorszám = Month(Date()), 'lezáratlan !!!', '')) AS lezáratlan FROM hónapok WHERE hónapok.sorszám NOT IN (SELECT sorszám FROM havi_lista) ORDER BY hónapok.sorszám;</p>
+
+    <p>2. megoldás</p>
+    <p>SELECT Format(Year(Date()),'0000') + '.' & hónap AS dátum, (SELECT rend_érték FROM havi_lista WHERE hónapok.sorszám = havi_lista.sorszám) AS rendelt_érték, IF(sorszám&lt;Month(Date()), 'lezárva', IF(sorszám = Month(Date()), 'lezáratlan !!!', '')) AS lezáratlan FROM hónapok;</p>
   </body>
 </html>

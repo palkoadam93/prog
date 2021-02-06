@@ -7,9 +7,16 @@
   </head>
   <body>
     <h1>27. feladat - Különböző szerkezetű sorokból álló lista</h1>
+    
     <h3>1. Készítsünk egy listát, amely egy paraméterrel megadott termékből megjelníti, hogy legyártható-e vagy sem! Írassuk ki a termék kódját és nevét, valamint azt, hogy legyártható vagy nem gyártható le!</h3>
+    <p>SELECT termék.kód, név, IF(EXISTS (SELECT szerkezet.kód FROM szerkezet, anyag WHERE szerkezet.azonosító = anyag.azonosító AND mennyiség > készlet AND szerkezet.kód = p_kód), 'nem gyártható le', 'legyártható') AS gyártható FROM termék WHERE termék.kód = p_kód;</p>
+    
     <h3>2. Készítsünk egy listát, amely üres, ha egy paraméterrel megadott termék legyártható, és ha nem gyártható le, akkor a terméknek adja meg azokat az anyagait, amiknek a kis készlete miatt a terméket nem tudjuk legyártani!</h3>
+    <p>SELECT kód, anyag.azonosító, neve FROM szerkezet, anyag WHERE szerkezet.azonosító = anyag.azonosító AND mennyiség > készlet AND kód = p_kód;</p>
+    
     <h3>3. Egyesítsük a két listát, azaz egy termékről meg kell állapítani, hogy legyártható vagy sem, majd ha nem gyártható le, ki kell listázni azokat az anyagokat, amelyekből a készlet kevesebb, mint amennyi a termék legyártásához szükséges!</h3>
-
+    <p>SELECT termék.kód, név, IF(EXISTS (SELECT kód FROM szerkezet, anyag WHERE szerkezet.azonosító = anyag.azonosító AND mennyiség > készlet AND kód = p_kód), 'nem gyártható le', 'legyártható') AS gyártható, "AS azonosító," AS neve, "AS készlet," AS szükséges, "AS hiányzik," AS mértékegység FROM termék</p>
+    <p>UNION</p>
+    <p>SELECT Null AS x, Null AS y, 'mert:' AS gyártható, anyag.azonosító, neve, készlet, mennyiség, mennyiség-készlet, mert_egys FROM szerkezet, anyag WHERE szerkezet.azonosító = anyag.azonosító AND mennyiség > készlet AND kód = p_kód ORDER BY kód DESC, azonosító;</p>
   </body>
 </html>

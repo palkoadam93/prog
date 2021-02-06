@@ -9,5 +9,17 @@
     <h1>19. feladat - Egy adott termékcsoportot megrendelt rendelések listája</h1>
     <h3>Keressük meg azokat a megrendeléseket, amelyekben megrendelték az összes olyan terméket, amelyeknek a kódja egy KERES nevű táblában van! (Elég a megrendelés számát kiíratni.)</h3>
 
+    <p>SELECT kód FROM termék WHERE kód IN ('AA2', 'BC1', 'BC9'); => KERES{kód}</p>
+
+    <p>1. megoldás</p>
+    <p>SELECT rend_szám FROM rendelés WHERE kód IN (SELECT kód FROM keres) GROUP BY rend_szám HAVING COUNT(kód) = (SELECT COUNT(*) FROM keres);</p>
+
+    <p>2. megoldás</p>
+    <p>SELECT rend_szám, kód FROM rendelésfej, keres;</p>
+    <p>SELECT rend_szám, kód FROM rendelésfej, keres WHERE rend_szám & kód NOT IN (SELECT rend_szám & kód FROM rendelés);</p>
+    <p>SELECT rend_szám FROM rendelésfej WHERE rend_szám NOT IN (SELECT rend_szám FROM rendelésfej, keres WHERE rend_szám & kód NOT IN (SELECT rend_szám & kód FROM rendelés));</p>
+
+    <p>3. megoldás</p>
+    <p>SELECT rend_szám FROM rendelésfej WHERE NOT EXISTS (SELECT kód FROM keres WHERE kód NOT IN (SELECT kód FROM rendelés WHERE rend_szám = rendelésfej.rend_szám));</p>
   </body>
 </html>
