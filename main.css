@@ -2,6 +2,28 @@ body {
     font-family: Arial;
 }
 
+/*
+article {
+    width: 45%;
+    border: 1px solid;
+}
+
+#prog {
+    float: left;
+}
+
+#irodai {
+    float: left;
+}
+
+#media {
+    float: left;
+}
+
+#lang {
+    float: left;
+}*/
+
 a {
     display: block;
     color: black;
