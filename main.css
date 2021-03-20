@@ -1,5 +1,7 @@
 body {
     font-family: Arial;
+    background-color:rgb(60, 60, 60);
+    color: white;
 }
 
 /*
@@ -26,13 +28,13 @@ article {
 
 a {
     display: block;
-    color: black;
+    color: white;
     text-decoration: none;
     text-align: center;
     padding: 10px;
 }
 
 a:hover {
-    background-color: purple;
+    background-color: orange;
     color: white;
 }
