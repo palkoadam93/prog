@@ -11,3 +11,7 @@ a:hover {
     background-color: orange;
     color: white;
 }
+
+section {overflow:auto;}
+.R {float:right; width:45%;}
+.L {float:left; width:45%;}
