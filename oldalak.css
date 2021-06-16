@@ -3,6 +3,11 @@ body {
     background-color:rgb(60, 60, 60);
     color: white;
 }
+h3 {
+    background-color: grey;
+    color: white;
+    padding: .5rem;
+}
 a {
     text-decoration: none;
     color: orange;
@@ -10,6 +15,10 @@ a {
 a:hover {
     background-color: orange;
     color: white;
+}
+h3 a {
+    display: block;
+    width: 100%;
 }
 
 section {overflow:auto;}
