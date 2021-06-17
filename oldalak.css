@@ -24,3 +24,13 @@ h3 a {
 section {overflow:auto;}
 .R {float:right; width:45%;}
 .L {float:left; width:45%;}
+
+.alg {
+    border: 1px solid red;
+    background-color: grey;
+    padding: 1rem;
+}
+.alg p {
+    margin: 0;
+    font-size: .7rem;
+}
