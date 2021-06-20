@@ -5,8 +5,6 @@ body {
 }
 h3 {
     background-color: grey;
-    color: white;
-    padding: .5rem;
 }
 a {
     text-decoration: none;
@@ -16,21 +14,7 @@ a:hover {
     background-color: orange;
     color: white;
 }
-h3 a {
-    display: block;
-    width: 100%;
-}
 
 section {overflow:auto;}
 .R {float:right; width:45%;}
 .L {float:left; width:45%;}
-
-.alg {
-    border: 1px solid red;
-    background-color: grey;
-    padding: 1rem;
-}
-.alg p {
-    margin: 0;
-    font-size: .7rem;
-}
